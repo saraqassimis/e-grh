@@ -1,11 +1,18 @@
 package controller;
 
+import bean.Employe;
 import bean.Image;
 import controller.util.JsfUtil;
 import controller.util.PaginationHelper;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import session.ImageFacade;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -17,6 +24,7 @@ import javax.faces.convert.FacesConverter;
 import javax.faces.model.DataModel;
 import javax.faces.model.ListDataModel;
 import javax.faces.model.SelectItem;
+import javax.servlet.http.Part;
 
 @Named("imageController")
 @SessionScoped
@@ -28,8 +36,76 @@ public class ImageController implements Serializable {
     private session.ImageFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    private Part part;
+ private String statusMessage;
 
     public ImageController() {
+    }
+    
+    public List<Image> getImageOfEmploye(Employe e){
+     
+     return getFacade().loadImages(e);
+ }
+
+    public Part getPart() {
+        return part;
+    }
+
+    private String getFileName(Part part) {
+        final String partHeader = part.getHeader("content-disposition");
+        System.out.println("***** partHeader: " + partHeader);
+        for (String content : part.getHeader("content-disposition").split(";")) {
+            if (content.trim().startsWith("filename")) {
+                return content.substring(content.indexOf('=') + 1).trim()
+                        .replace("\"", "");
+            }
+        }
+        return null;
+    }
+    public String uploadFile() throws IOException {
+ 
+        String fileName = getFileName(part);
+        current.setFileName(fileName);
+        System.out.println("***** fileName: " + fileName);
+        String basePath = "C:" + File.separator + "egrh" + File.separator;
+        File outputFilePath = new File(basePath + fileName);
+        InputStream inputStream = null;
+        OutputStream outputStream = null;
+        try {
+            inputStream = part.getInputStream();
+            outputStream = new FileOutputStream(outputFilePath);
+ 
+            int read = 0;
+            final byte[] bytes = new byte[1024];
+            while ((read = inputStream.read(bytes)) != -1) {
+                outputStream.write(bytes, 0, read);
+            }
+ 
+            statusMessage = "File upload successfull !!";
+        } catch (IOException e) {
+            e.printStackTrace();
+            statusMessage = "File upload failed !!";
+        } finally {
+            if (outputStream != null) {
+                outputStream.close();
+            }
+            if (inputStream != null) {
+                inputStream.close();
+            }
+        }
+        return null;    
+    }
+    
+    public void setPart(Part part) {
+        this.part = part;
+    }
+
+    public String getStatusMessage() {
+        return statusMessage;
+    }
+
+    public void setStatusMessage(String statusMessage) {
+        this.statusMessage = statusMessage;
     }
 
     public Image getSelected() {
@@ -79,11 +155,15 @@ public class ImageController implements Serializable {
         return "Create";
     }
 
-    public String create() {
+    public String create(Employe employe) {
         try {
+            current.setEmploye(employe);
+             System.out.println("*******AVANTUPLOAD");
+            uploadFile();
+            System.out.println("========ApresUPLOAD");
             getFacade().create(current);
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("ImageCreated"));
-            return prepareCreate();
+           return "/emploiprecedent/Create";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;

@@ -1,11 +1,13 @@
 package controller;
 
+import bean.Employe;
 import bean.Evaluationemploye;
 import controller.util.JsfUtil;
 import controller.util.PaginationHelper;
 import session.EvaluationemployeFacade;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -79,11 +81,20 @@ public class EvaluationemployeController implements Serializable {
         return "Create";
     }
 
-    public String create() {
+  public List<Evaluationemploye> getAllEvaluationsOfEmploye(Employe e){
+     
+     return getFacade().loadEvaluations(e); 
+ }
+    
+    public String create(Employe employe) {
         try {
+            current.setEmploye(employe);
             getFacade().create(current);
+            recreateModel();
             JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("EvaluationemployeCreated"));
-            return prepareCreate();
+             current = new Evaluationemploye();
+        selectedItemIndex = -1;
+        return "Create";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;

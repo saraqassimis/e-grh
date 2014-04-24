@@ -14,34 +14,92 @@
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
             <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputText value="#{bundle.ViewDiplomeLabel_id}"/>
-                    <h:outputText value="#{diplomeController.selected.id}" title="#{bundle.ViewDiplomeTitle_id}"/>
-                    <h:outputText value="#{bundle.ViewDiplomeLabel_denomination}"/>
-                    <h:outputText value="#{diplomeController.selected.denomination}" title="#{bundle.ViewDiplomeTitle_denomination}"/>
-                    <h:outputText value="#{bundle.ViewDiplomeLabel_etablissement}"/>
-                    <h:outputText value="#{diplomeController.selected.etablissement}" title="#{bundle.ViewDiplomeTitle_etablissement}"/>
-                    <h:outputText value="#{bundle.ViewDiplomeLabel_anne}"/>
-                    <h:outputText value="#{diplomeController.selected.anne}" title="#{bundle.ViewDiplomeTitle_anne}"/>
-                    <h:outputText value="#{bundle.ViewDiplomeLabel_niveauEtude}"/>
-                    <h:outputText value="#{diplomeController.selected.niveauEtude}" title="#{bundle.ViewDiplomeTitle_niveauEtude}"/>
-                    <h:outputText value="#{bundle.ViewDiplomeLabel_employe}"/>
-                    <h:outputText value="#{diplomeController.selected.employe}" title="#{bundle.ViewDiplomeTitle_employe}"/>
-                </h:panelGrid>
-                <br />
-                <h:commandLink action="#{diplomeController.destroyAndView}" value="#{bundle.ViewDiplomeDestroyLink}"/>
-                <br />
-                <br />
-                <h:link outcome="Edit" value="#{bundle.ViewDiplomeEditLink}"/>
-                <br />
-                <h:commandLink action="#{diplomeController.prepareCreate}" value="#{bundle.ViewDiplomeCreateLink}" />
-                <br />
-                <h:commandLink action="#{diplomeController.prepareList}" value="#{bundle.ViewDiplomeShowAllLink}"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.ViewDiplomeIndexLink}"/>
+             
+                <div class="content-box-large">
+                    <div class="panel-body">
+                        <fieldset>
+                            <legend> Diplome</legend><br></br>
+                             <div  class="well">
+                                        <h:link  class="btn btn-lg btn-block btn-default" outcome="/employe/List" ><label>List des employés </label></h:link>
+                                         <h:link  class="btn btn-lg btn-block btn-default" outcome="/diplome/ListDiplomes" ><label>List des Diplomes </label></h:link>
+               </div>  
+                            <div id="wizard">
+                                <h2>Diplome</h2>
+                                <section>
+                                    <div class="form-horizontal">
+
+                                        <div class="row">
+
+                                            <div  class="form-group col-sm-6">
+
+                                                <div class="col-lg-10">
+                                                    <label>Denomination *</label>
+                                                    <h:outputText id="denomination" value="#{diplomeController.selected.denomination}" title="#{bundle.CreateDiplomeTitle_denomination}" class="form-control" />
+                                                </div>
+                                            </div>
+
+
+                                            <div class="form-group col-sm-6">
+
+                                                <div class="col-lg-10">
+                                                    <label >Etablissement *</label>
+                                                    <h:outputText id="etablissement" value="#{diplomeController.selected.etablissement}" title="#{bundle.CreateDiplomeTitle_etablissement}" class="form-control" />
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="form-group col-sm-6" >
+
+                                                <div class="col-lg-10">
+                                                    <label >Année *</label>
+                                                    <h:outputText  id="anne" value="#{diplomeController.selected.anne}" title="#{bundle.CreateDiplomeTitle_anne}" class="form-control"/>
+                                                       
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-sm-6">
+
+                                                <div class="col-lg-10 ">
+                                                    <label >Niveau d'étude *</label>
+                                                    <h:outputText id="niveauEtude" value="#{diplomeController.selected.niveauEtude}" title="#{bundle.CreateDiplomeTitle_niveauEtude}" class="form-control" />
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        
+
+
+
+                                    </div>
+
+                                </section>
+                                
+                     
+                                
+                            </div>
+                        </fieldset>
+
+                    </div>
+                </div>
 
             </h:form>
+            <script>
+
+                $(function()
+                {
+                    $("#wizard").steps({
+                        headerTag: "h2",
+                        bodyTag: "section",
+                        transitionEffect: "slideLeft"
+                    });
+                    $(".datep").datepicker({
+                        format: "dd/mm/yyyy"
+                    });
+
+                });
+
+            </script>
         </ui:define>
     </ui:composition>
 

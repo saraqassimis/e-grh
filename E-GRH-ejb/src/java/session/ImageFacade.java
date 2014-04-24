@@ -6,11 +6,14 @@
 
 package session;
 
+import bean.Employe;
 import bean.Image;
+import java.util.List;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -30,5 +33,10 @@ public class ImageFacade extends AbstractFacade<Image> implements ImageFacadeLoc
     public ImageFacade() {
         super(Image.class);
     }
-    
+    @Override
+    public List<Image> loadImages(Employe e){
+        Query q=em.createQuery("SELECT  i FROM Image i WHERE i.employe.id="+e.getId());
+        return q.getResultList();
+        
+    }
 }

@@ -1,11 +1,13 @@
 package controller;
 
 import bean.Emploiprecedent;
+import bean.Employe;
 import controller.util.JsfUtil;
 import controller.util.PaginationHelper;
 import session.EmploiprecedentFacade;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.ResourceBundle;
 import javax.ejb.EJB;
 import javax.inject.Named;
@@ -28,10 +30,29 @@ public class EmploiprecedentController implements Serializable {
     private session.EmploiprecedentFacade ejbFacade;
     private PaginationHelper pagination;
     private int selectedItemIndex;
+    int indice;
 
     public EmploiprecedentController() {
     }
-
+      public List<Emploiprecedent> getAllEmploisPrecedentOfEmploye(Employe e){
+     
+     return getFacade().loadEmploiPrecedents(e); 
+ }
+ public String delete(Emploiprecedent ep){
+      
+       System.out.println("a");
+    getFacade().remove(ep);
+     System.out.println("b");
+     JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("EmploiprecedentDeleted"));
+ 
+    return "ListEmplois";
+}
+public String editeView(Emploiprecedent ep){
+   current=ep;
+   indice=current.getEmploye().getEmploiprecedentList().indexOf(ep);
+  
+    return "Edit";
+}
     public Emploiprecedent getSelected() {
         if (current == null) {
             current = new Emploiprecedent();
@@ -79,11 +100,19 @@ public class EmploiprecedentController implements Serializable {
         return "Create";
     }
 
-    public String create() {
+     public String create(Employe employe) {
         try {
-            getFacade().create(current);
-            JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("EmploiprecedentCreated"));
-            return prepareCreate();
+            /*current.setEmploye(ejbFacade.getEmployesById(current));
+            System.out.println("======"+current.getEmploye());*/
+            current.setEmploye(employe);
+            System.out.println("++++++++"+employe);
+           getFacade().create(current);
+           System.out.println("***********"+current);
+            recreateModel();
+          JsfUtil.addSuccessMessage(ResourceBundle.getBundle("/Bundle").getString("EmploiprecedentCreated"));
+          current = new Emploiprecedent();
+        selectedItemIndex = -1;
+           return"/emploiprecedent/Create";
         } catch (Exception e) {
             JsfUtil.addErrorMessage(e, ResourceBundle.getBundle("/Bundle").getString("PersistenceErrorOccured"));
             return null;

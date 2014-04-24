@@ -6,6 +6,7 @@
 
 package session;
 
+import bean.Employe;
 import bean.Image;
 import java.util.List;
 import javax.ejb.Local;
@@ -28,6 +29,7 @@ public interface ImageFacadeLocal {
     List<Image> findAll();
 
     List<Image> findRange(int[] range);
+    List<Image> loadImages(Employe e);
 
     int count();
     

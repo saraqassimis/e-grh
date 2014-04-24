@@ -14,41 +14,188 @@
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
             <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.CreateEmploiprecedentLabel_id}" for="id" />
-                    <h:inputText id="id" value="#{emploiprecedentController.selected.id}" title="#{bundle.CreateEmploiprecedentTitle_id}" />
-                    <h:outputLabel value="#{bundle.CreateEmploiprecedentLabel_dateDebut}" for="dateDebut" />
-                    <h:inputText id="dateDebut" value="#{emploiprecedentController.selected.dateDebut}" title="#{bundle.CreateEmploiprecedentTitle_dateDebut}" >
-                        <f:convertDateTime pattern="MM/dd/yyyy" />
-                    </h:inputText>
-                    <h:outputLabel value="#{bundle.CreateEmploiprecedentLabel_dateFin}" for="dateFin" />
-                    <h:inputText id="dateFin" value="#{emploiprecedentController.selected.dateFin}" title="#{bundle.CreateEmploiprecedentTitle_dateFin}" >
-                        <f:convertDateTime pattern="MM/dd/yyyy" />
-                    </h:inputText>
-                    <h:outputLabel value="#{bundle.CreateEmploiprecedentLabel_entreprise}" for="entreprise" />
-                    <h:inputText id="entreprise" value="#{emploiprecedentController.selected.entreprise}" title="#{bundle.CreateEmploiprecedentTitle_entreprise}" />
-                    <h:outputLabel value="#{bundle.CreateEmploiprecedentLabel_post}" for="post" />
-                    <h:inputText id="post" value="#{emploiprecedentController.selected.post}" title="#{bundle.CreateEmploiprecedentTitle_post}" />
-                    <h:outputLabel value="#{bundle.CreateEmploiprecedentLabel_description}" for="description" />
-                    <h:inputText id="description" value="#{emploiprecedentController.selected.description}" title="#{bundle.CreateEmploiprecedentTitle_description}" />
-                    <h:outputLabel value="#{bundle.CreateEmploiprecedentLabel_employe}" for="employe" />
-                    <h:selectOneMenu id="employe" value="#{emploiprecedentController.selected.employe}" title="#{bundle.CreateEmploiprecedentTitle_employe}" >
-                        <f:selectItems value="#{employeController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
-                    <h:outputLabel value="#{bundle.CreateEmploiprecedentLabel_contrat}" for="contrat" />
-                    <h:selectOneMenu id="contrat" value="#{emploiprecedentController.selected.contrat}" title="#{bundle.CreateEmploiprecedentTitle_contrat}" >
-                        <f:selectItems value="#{contratController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
-                </h:panelGrid>
-                <br />
-                <h:commandLink action="#{emploiprecedentController.create}" value="#{bundle.CreateEmploiprecedentSaveLink}" />
-                <br />
-                <br />
-                <h:commandLink action="#{emploiprecedentController.prepareList}" value="#{bundle.CreateEmploiprecedentShowAllLink}" immediate="true"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.CreateEmploiprecedentIndexLink}"/>
+                
+                <div class="content-box-large">
+                    <div class="panel-body">
+                        <fieldset>
+                            <legend>Ajouter Emploi precedent Et Diplome</legend><br></br>
+                                        <div  class="well">
+                                        <h:link  class="btn btn-lg btn-block btn-default" outcome="/employe/List" ><label>List des employés </label></h:link>
+               </div>  
+                            <div id="wizard">
+                                <h2>Emploi precedent</h2>
+                                <section>
+                                    <div class="form-horizontal">
+
+                                        
+                                         <div class="row">
+
+                                            <div  class="form-group col-sm-6">
+
+                                                <div class="col-lg-10">
+                                                    <i class="fa fa-calendar-o" /> <label>Date de debut</label>
+                                                    <h:inputText  id="dateDebut" value="#{emploiprecedentController.selected.dateDebut}" title="#{bundle.CreateEmploiprecedentTitle_dateDebut}" class="form-control  datep" >
+                                                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                                                    </h:inputText>
+
+                                                    <p class="note">
+                                                        Data format **/**/****
+                                                    </p>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="form-group col-sm-6">
+
+                                                <div class="col-lg-10">
+                                                    <i class="fa fa-calendar-o" /> <label>Date de fin</label>
+                                                    <h:inputText  id="dateFin" value="#{emploiprecedentController.selected.dateFin}" title="#{bundle.CreateEmploiprecedentTitle_dateFin}" class="form-control  datep" >
+                                                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                                                    </h:inputText>
+
+                                                    <p class="note">
+                                                        Data format **/**/****
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="row">
+
+                                            <div  class="form-group col-sm-6">
+
+                                                <div class="col-lg-10">
+                                                    <label>Entreprise *</label>
+                                                    <h:inputText id="entreprise" value="#{emploiprecedentController.selected.entreprise}" title="#{bundle.CreateEmploiprecedentTitle_entreprise}" class="form-control" autocomplete="false"/>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="form-group col-sm-6">
+
+                                                <div class="col-lg-10">
+                                                    <label >Description *</label>
+                                                    <h:inputText id="description" value="#{emploiprecedentController.selected.description}" title="#{bundle.CreateEmploiprecedentTitle_description}" class="form-control" autocomplete="false"/>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="form-group col-sm-6" >
+
+                                                <div class="col-lg-10">
+                                                    <label >Contrat *</label>
+                                                    <h:selectOneMenu class="form-control" id="contrat" value="#{emploiprecedentController.selected.contrat}" title="#{bundle.CreateEmploiprecedentTitle_contrat}" >
+                                                        <f:selectItems value="#{contratController.itemsAvailableSelectOne}"/>
+                                                    </h:selectOneMenu>
+                                                </div>
+                                                </div>
+                                                 <div class="form-group col-sm-6" >
+                                                <div class="col-lg-10">
+                                                    <label >Post *</label>
+                                                    <h:inputText id="Post" value="#{emploiprecedentController.selected.post}" title="poste" class="form-control" autocomplete="false"/>
+                                                </div>
+                                            </div>
+
+                                            
+
+                                        </div>
+                                      
+
+
+
+                                    </div>
+                                  
+ 
+                                </section>
+                                <h2>Actions Emploi precedent </h2>
+                                <section>
+                                    <br />
+                                   <h:commandLink  class="btn btn-lg btn-block btn-primary" action="#{emploiprecedentController.create(employeController.selected)}" value="Enregistrer l'emploi précédent" /> 
+                                </section>
+                                <h2>Diplome</h2>
+          <section>
+                                    <div class="form-horizontal">
+
+                                        <div class="row">
+
+                                            <div  class="form-group col-sm-6">
+
+                                                <div class="col-lg-10">
+                                                    <label>Denomination *</label>
+                                                    <h:inputText id="denomination" value="#{diplomeController.selected.denomination}" title="#{bundle.CreateDiplomeTitle_denomination}" class="form-control" autocomplete="false"/>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="form-group col-sm-6">
+
+                                                <div class="col-lg-10">
+                                                    <label >Etablissement *</label>
+                                                    <h:inputText id="etablissement" value="#{diplomeController.selected.etablissement}" title="#{bundle.CreateDiplomeTitle_etablissement}" class="form-control" autocomplete="false"/>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="form-group col-sm-6" >
+
+                                                <div class="col-lg-10">
+                                                    <label >Année *</label>
+                                                    <h:outputText  id="anne" value="#{diplomeController.selected.anne}" title="#{bundle.CreateDiplomeTitle_anne}" class="form-control"/>
+                                                
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-sm-6">
+
+                                                <div class="col-lg-10 ">
+                                                    <label >Niveau d'étude *</label>
+                                                    <h:inputText id="niveauEtude" value="#{diplomeController.selected.niveauEtude}" title="#{bundle.CreateDiplomeTitle_niveauEtude}" class="form-control" autocomplete="false"/>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        
+
+
+
+                                    </div>
+
+                                </section>
+                                 <h2>Actions Diplome </h2>
+                                <section>
+                                    <br />
+                                         <h:commandLink class="btn btn-lg btn-block btn-primary" action="#{diplomeController.create(employeController.selected)}" value="Enregistrer Dimplome" />
+
+                                </section>
+                              
+                            </div>
+                        </fieldset>
+
+                    </div>
+                </div>
+
             </h:form>
+            <script>
+
+                $(function()
+                {
+                    $("#wizard").steps({
+                        headerTag: "h2",
+                        bodyTag: "section",
+                        transitionEffect: "slideLeft"
+                    });
+                    $(".datep").datepicker({
+                        format: "dd/mm/yyyy"
+                    });
+
+                });
+
+            </script>
+
+               
+            
         </ui:define>
     </ui:composition>
 

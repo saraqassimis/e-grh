@@ -7,10 +7,13 @@
 package session;
 
 import bean.Emploiprecedent;
+import bean.Employe;
+import java.util.List;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 
 /**
  *
@@ -29,6 +32,13 @@ public class EmploiprecedentFacade extends AbstractFacade<Emploiprecedent> imple
 
     public EmploiprecedentFacade() {
         super(Emploiprecedent.class);
+    }
+    
+     @Override
+    public List<Emploiprecedent> loadEmploiPrecedents(Employe e){
+        Query q=em.createQuery("SELECT  e FROM Emploiprecedent e WHERE e.employe.id="+e.getId());
+        return q.getResultList();
+        
     }
     
 }

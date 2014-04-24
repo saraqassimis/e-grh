@@ -6,6 +6,7 @@
 
 package session;
 
+import bean.Employe;
 import bean.Evaluationemploye;
 import java.util.List;
 import javax.ejb.Local;
@@ -28,6 +29,7 @@ public interface EvaluationemployeFacadeLocal {
     List<Evaluationemploye> findAll();
 
     List<Evaluationemploye> findRange(int[] range);
+    List<Evaluationemploye> loadEvaluations(Employe e);
 
     int count();
     

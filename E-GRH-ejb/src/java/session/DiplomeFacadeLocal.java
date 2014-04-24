@@ -7,6 +7,7 @@
 package session;
 
 import bean.Diplome;
+import bean.Employe;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -28,6 +29,8 @@ public interface DiplomeFacadeLocal {
     List<Diplome> findAll();
 
     List<Diplome> findRange(int[] range);
+    
+      List<Diplome> loadDiplomes(Employe e);
 
     int count();
     

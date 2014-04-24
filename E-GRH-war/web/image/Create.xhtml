@@ -13,19 +13,36 @@
             <h:panelGroup id="messagePanel" layout="block">
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
-            <h:form>
+            <h:form enctype="multipart/form-data">
+                <div class="form-group">
+                   
+                                <label class="control-label col-md-3">Image Upload</label>
+                                <div class="col-md-9">
+                                    <div class="fileupload fileupload-new" data-provides="fileupload">
+                                        <div class="fileupload-new thumbnail" style="width: 200px; height: 150px;">
+                                            <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt="" />
+                                        </div>
+                                        <div class="fileupload-preview fileupload-exists thumbnail" style="max-width: 200px; max-height: 150px; line-height: 20px;"></div>
+                                        <div>
+                                                   <span class="btn btn-white btn-file">
+                                                   <span class="fileupload-new"><i class="fa fa-paper-clip"></i> Select image</span>
+                                                   <span class="fileupload-exists"><i class="fa fa-undo"></i> Change</span>
+                                                    <h:inputFile class="default" value="#{imageController.part}" />
+                                                   </span>
+                                            <a href="#" class="btn btn-danger fileupload-exists" data-dismiss="fileupload"><i class="fa fa-trash"></i> Remove</a>
+                                        </div>
+                                    </div>
+                                  
+                                </div>
+                            </div>
                 <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.CreateImageLabel_id}" for="id" />
-                    <h:inputText id="id" value="#{imageController.selected.id}" title="#{bundle.CreateImageTitle_id}" />
-                    <h:outputLabel value="#{bundle.CreateImageLabel_fileName}" for="fileName" />
-                    <h:inputText id="fileName" value="#{imageController.selected.fileName}" title="#{bundle.CreateImageTitle_fileName}" />
-                    <h:outputLabel value="#{bundle.CreateImageLabel_employe}" for="employe" />
-                    <h:selectOneMenu id="employe" value="#{imageController.selected.employe}" title="#{bundle.CreateImageTitle_employe}" >
+                    
+                    <h:selectOneMenu  style="font-size:0.0pt;" id="employe" value="#{imageController.selected.employe}" title="#{bundle.CreateImageTitle_employe}" >
                         <f:selectItems value="#{employeController.itemsAvailableSelectOne}"/>
                     </h:selectOneMenu>
                 </h:panelGrid>
                 <br />
-                <h:commandLink action="#{imageController.create}" value="#{bundle.CreateImageSaveLink}" />
+                <h:commandLink action="#{imageController.create(employeController.selected)}" value="#{bundle.CreateImageSaveLink}" />
                 <br />
                 <br />
                 <h:commandLink action="#{imageController.prepareList}" value="#{bundle.CreateImageShowAllLink}" immediate="true"/>

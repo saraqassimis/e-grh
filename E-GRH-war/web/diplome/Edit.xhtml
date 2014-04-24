@@ -14,32 +14,123 @@
                 <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
             </h:panelGroup>
             <h:form>
-                <h:panelGrid columns="2">
-                    <h:outputLabel value="#{bundle.EditDiplomeLabel_id}" for="id" />
-                    <h:inputText id="id" value="#{diplomeController.selected.id}" title="#{bundle.EditDiplomeTitle_id}" />
-                    <h:outputLabel value="#{bundle.EditDiplomeLabel_denomination}" for="denomination" />
-                    <h:inputText id="denomination" value="#{diplomeController.selected.denomination}" title="#{bundle.EditDiplomeTitle_denomination}" />
-                    <h:outputLabel value="#{bundle.EditDiplomeLabel_etablissement}" for="etablissement" />
-                    <h:inputText id="etablissement" value="#{diplomeController.selected.etablissement}" title="#{bundle.EditDiplomeTitle_etablissement}" />
-                    <h:outputLabel value="#{bundle.EditDiplomeLabel_anne}" for="anne" />
-                    <h:inputText id="anne" value="#{diplomeController.selected.anne}" title="#{bundle.EditDiplomeTitle_anne}" />
-                    <h:outputLabel value="#{bundle.EditDiplomeLabel_niveauEtude}" for="niveauEtude" />
-                    <h:inputText id="niveauEtude" value="#{diplomeController.selected.niveauEtude}" title="#{bundle.EditDiplomeTitle_niveauEtude}" />
-                    <h:outputLabel value="#{bundle.EditDiplomeLabel_employe}" for="employe" />
-                    <h:selectOneMenu id="employe" value="#{diplomeController.selected.employe}" title="#{bundle.EditDiplomeTitle_employe}" >
-                        <f:selectItems value="#{employeController.itemsAvailableSelectOne}"/>
-                    </h:selectOneMenu>
-                </h:panelGrid>
-                <h:commandLink action="#{diplomeController.update}" value="#{bundle.EditDiplomeSaveLink}"/>
-                <br />
-                <br />
-                <h:link outcome="View" value="#{bundle.EditDiplomeViewLink}"/>
-                <br />
-                <h:commandLink action="#{diplomeController.prepareList}" value="#{bundle.EditDiplomeShowAllLink}" immediate="true"/>
-                <br />
-                <br />
-                <h:link outcome="/index" value="#{bundle.EditDiplomeIndexLink}" />
+            
+                <div class="content-box-large">
+                    <div class="panel-body">
+                        <fieldset>
+                            <legend>Modifier Diplome</legend><br></br>
+                             <div  class="well">
+                                        <h:link  class="btn btn-lg btn-block btn-default" outcome="/employe/List" ><label>List des employés </label></h:link>
+                                         <h:link  class="btn btn-lg btn-block btn-default" outcome="/diplome/ListDiplomes" ><label>List des Diplomes </label></h:link>
+               </div>  
+                            <div id="wizard">
+                                <h2>Diplome</h2>
+                                <section>
+                                    <div class="form-horizontal">
+
+                                        <div class="row">
+
+                                            <div  class="form-group col-sm-6">
+
+                                                <div class="col-lg-10">
+                                                    <label>Denomination *</label>
+                                                    <h:inputText id="denomination" value="#{diplomeController.selected.denomination}" title="#{bundle.CreateDiplomeTitle_denomination}" class="form-control" autocomplete="false"/>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="form-group col-sm-6">
+
+                                                <div class="col-lg-10">
+                                                    <label >Etablissement *</label>
+                                                    <h:inputText id="etablissement" value="#{diplomeController.selected.etablissement}" title="#{bundle.CreateDiplomeTitle_etablissement}" class="form-control" autocomplete="false"/>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="form-group col-sm-6" >
+
+                                                <div class="col-lg-10">
+                                                    <label >Année *</label>
+                                                    <h:selectOneMenu  id="anne" value="#{diplomeController.selected.anne}" title="#{bundle.CreateDiplomeTitle_anne}" class="form-control">
+                                                        <f:selectItem itemValue="vide" itemLabel="-- Select --" />
+                                                        <f:selectItem itemValue="2020" itemLabel="2020" />
+                                                        <f:selectItem itemValue="2019" itemLabel="2019" />
+                                                        <f:selectItem itemValue="2018" itemLabel="2018" />
+                                                        <f:selectItem itemValue="2017" itemLabel="2017" />
+                                                        <f:selectItem itemValue="2016" itemLabel="2016" />
+                                                        <f:selectItem itemValue="2030" itemLabel="2030" />
+                                                        <f:selectItem itemValue="2030" itemLabel="2030" />
+                                                        <f:selectItem itemValue="2030" itemLabel="2030" />
+                                                        <f:selectItem itemValue="2030" itemLabel="2030" />
+                                                        <f:selectItem itemValue="2030" itemLabel="2030" />
+                                                        <f:selectItem itemValue="2030" itemLabel="2030" />
+                                                        <f:selectItem itemValue="2030" itemLabel="2030" />
+                                                        <f:selectItem itemValue="2030" itemLabel="2030" />
+                                                        <f:selectItem itemValue="2030" itemLabel="2030" />
+                                                        <f:selectItem itemValue="2030" itemLabel="2030" />
+                                                        <f:selectItem itemValue="2030" itemLabel="2030" />
+                                                        <f:selectItem itemValue="2030" itemLabel="2030" />
+                                                        <f:selectItem itemValue="2030" itemLabel="2030" />
+                                                        <f:selectItem itemValue="2030" itemLabel="2030" />
+                                                        <f:selectItem itemValue="2030" itemLabel="2030" />
+                                                        <f:selectItem itemValue="2030" itemLabel="2030" />
+                                                        
+
+                                                    </h:selectOneMenu>
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group col-sm-6">
+
+                                                <div class="col-lg-10 ">
+                                                    <label >Niveau d'étude *</label>
+                                                    <h:inputText id="niveauEtude" value="#{diplomeController.selected.niveauEtude}" title="#{bundle.CreateDiplomeTitle_niveauEtude}" class="form-control" autocomplete="false"/>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        
+
+
+
+                                    </div>
+
+                                </section>
+                                <h2>Action</h2>
+  
+                                <section>
+                                   <br />
+                                         <h:commandLink class="btn btn-lg btn-block btn-primary" action="#{diplomeController.update()}" value="Modifier" />
+<br />
+<h:commandLink class="btn btn-lg btn-block btn-primary" action="#{diplomeController.prepareList()}" value="Annuler" />
+                                </section>
+                     
+                                
+                            </div>
+                        </fieldset>
+
+                    </div>
+                </div>
+
             </h:form>
+            <script>
+
+                $(function()
+                {
+                    $("#wizard").steps({
+                        headerTag: "h2",
+                        bodyTag: "section",
+                        transitionEffect: "slideLeft"
+                    });
+                    $(".datep").datepicker({
+                        format: "dd/mm/yyyy"
+                    });
+
+                });
+
+            </script>
         </ui:define>
     </ui:composition>
 
